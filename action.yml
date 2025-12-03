@@ -1,0 +1,164 @@
+name: "Actionlint Action"
+description: "Easily use rhysd/actionlint in a Workflow run with Pyflakes and Actions caching."
+author: "Shane"
+
+branding:
+  icon: "activity"
+  color: "blue"
+
+inputs:
+  version:
+    description: "Actionlint Version Tag"
+    default: "latest"
+  arguments:
+    description: "Command Line Arguments"
+  shellcheck_opts:
+    description: "Shellcheck Options"
+  pyflakes:
+    description: "Install Pyflakes"
+    default: "true"
+  arch:
+    description: "Architecture String"
+  token:
+    description: "GitHub PAT"
+
+runs:
+  using: "composite"
+  steps:
+    - name: "Architecture"
+      id: arch
+      shell: bash
+      run: |
+        echo "::group::Parsing Architecture"
+
+        if [ -n "${{ inputs.arch }}" ];then
+          echo "arch=${{ inputs.arch }}" >> "$GITHUB_OUTPUT"
+        else
+          uname -a
+
+          echo "uname -s: $(uname -s)"
+          kernel=$(uname -s)
+          case "$kernel" in
+            Darwin)   kernel="darwin"   ;;
+            FreeBSD)  kernel="freebsd"  ;;
+            Linux)    kernel="linux"    ;;
+            * )       kernel="linux"    ;;
+          esac
+          echo "kernel: ${kernel}"
+
+          echo "uname -m: $(uname -m)"
+          hardware=$(uname -m)
+          case "$hardware" in
+            x86)      hardware="amd386"  ;;
+            i?86)     hardware="amd386"  ;;
+            amd64)    hardware="amd64"   ;;
+            x86_64)   hardware="amd64"   ;;
+            aarch64)  hardware="arm64"   ;;
+            * )       hardware="amd64"   ;;
+          esac
+          echo "hardware: ${hardware}"
+
+          echo "arch: ${kernel}_${hardware}"
+          echo "arch=${kernel}_${hardware}" >> "$GITHUB_OUTPUT"
+        fi
+        echo "::endgroup::"
+
+    - name: "Cache Key"
+      id: key
+      env:
+        key: actionlint-${{ inputs.version }}-${{ steps.arch.outputs.arch }}
+      shell: bash
+      run: echo "key=${{ env.key }}" >> "$GITHUB_OUTPUT"
+
+    - name: "Cache Clear"
+      if: ${{ contains(github.event.head_commit.message, 'delete-actionlint-cache') }}
+      continue-on-error: true
+      env:
+        GH_TOKEN: ${{ inputs.token || github.token }}
+      shell: bash
+      run: |
+        gh cache delete ${{ steps.key.outputs.key }}
+
+    - name: "Cache Restore"
+      id: cache
+      uses: actions/cache/restore@v4
+      with:
+        key: ${{ steps.key.outputs.key }}
+        path: |
+          ${{ runner.temp }}/actionlint
+          ${{ runner.temp }}/pyflakes-*-py2.py3-none-any.whl
+
+    - name: "Download"
+      id: download
+      if: ${{ steps.cache.outputs.cache-hit != 'true' }}
+      env:
+        GH_TOKEN: ${{ inputs.token || github.token }}
+      shell: bash
+      run: |
+        echo "Downloading Actionlint"
+
+        if [ "${{ inputs.version }}" == "latest" ];then
+          tag="latest"
+        else
+          tag="tags/${{ inputs.version }}"
+        fi
+
+        echo "::group::Release - ${tag}"
+        release="$(gh api --cache 1h /repos/rhysd/actionlint/releases/${tag})"
+        echo "release: ${release}"
+        echo "::endgroup::"
+
+        echo "::group::Asset - ${{ steps.arch.outputs.arch }}"
+        asset="$(echo ${release} |\
+          jq '[.assets[] | select(.name | contains("${{ steps.arch.outputs.arch }}"))]' |\
+          jq '.[0]')"
+        echo "asset: ${asset}"
+        echo "::endgroup::"
+
+        tag_name="$(echo ${release} | jq -r '.tag_name')"
+        echo "::group::Download - ${tag_name}"
+
+        url="$(echo ${asset} | jq -r '.browser_download_url')"
+        echo "Downloading: ${url}"
+
+        echo "Destination: ${{ runner.temp }}/actionlint"
+        curl -sL "${url}" | tar xz -C "${{ runner.temp }}" actionlint
+        file "${{ runner.temp }}/actionlint" ||:
+        echo "::endgroup::"
+
+        echo -n "Actionlint Version: "
+        "${{ runner.temp }}/actionlint" --version
+
+    - name: "Install Pyflakes"
+      if: ${{ inputs.pyflakes != 'false' }}
+      shell: bash
+      run: |
+        which pyflakes && exit 0
+        cd ${{ runner.temp }}
+        if [ -f pyflakes-*-py2.py3-none-any.whl ];then
+          echo "::group::Installing Cached Pyflakes"
+          python -m pip install pyflakes-*-py2.py3-none-any.whl
+        else
+          echo "::group::Downloading Latest Pyflakes"
+          python -m pip download pyflakes
+          python -m pip install pyflakes-*-py2.py3-none-any.whl
+        fi
+        echo "::endgroup::"
+
+    - name: "Cache Save"
+      if: ${{ steps.cache.outputs.cache-hit != 'true' }}
+      uses: actions/cache/save@v4
+      with:
+        key: ${{ steps.cache.outputs.cache-primary-key }}
+        path: |
+          ${{ runner.temp }}/actionlint
+          ${{ runner.temp }}/pyflakes-*-py2.py3-none-any.whl
+
+    - name: "Actionlint"
+      id: actionlint
+      env:
+        SHELLCHECK_OPTS: ${{ inputs.shellcheck_opts }}
+      shell: bash
+      run: |
+        echo -e "\e[1;32mRunning: \e[1;34mactionlint \e[1;36m-color -verbose ${{ inputs.arguments }}"
+        "${{ runner.temp }}/actionlint" -color -verbose ${{ inputs.arguments }}

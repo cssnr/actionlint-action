@@ -1,0 +1,53 @@
+name: "Test"
+
+# actions-up-ignore-file
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["master"]
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: "Test"
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v6
+
+      - name: "Debug event.json"
+        if: ${{ !github.event.act }}
+        continue-on-error: true
+        run: cat "${GITHUB_EVENT_PATH}"
+
+      - name: "Debug CTX github"
+        if: ${{ !github.event.act }}
+        continue-on-error: true
+        env:
+          GITHUB_CTX: ${{ toJSON(github) }}
+        run: echo "$GITHUB_CTX"
+
+      - name: "Debug Environment"
+        if: ${{ !github.event.act }}
+        continue-on-error: true
+        run: env
+
+      - name: "Test Local Action"
+        id: test
+        uses: ./
+
+      #- name: "Validate Outputs"
+      #  uses: cssnr/validate-outputs-action@master
+      #  with:
+      #    outputs: ${{ toJSON(steps.test.outputs) }}
+      #    data: |
+      #      download_url:
