@@ -143,10 +143,10 @@ runs:
 
     - name: "Install Pyflakes"
       if: ${{ inputs.pyflakes != 'false' }}
+      working-directory: ${{ runner.temp }}
       shell: bash
       run: |
         which pyflakes && exit 0
-        cd ${{ runner.temp }}
         if [ -f pyflakes-*-py2.py3-none-any.whl ];then
           echo "::group::Installing Cached Pyflakes"
           python -m pip install pyflakes-*-py2.py3-none-any.whl
