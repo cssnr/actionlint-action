@@ -54,12 +54,12 @@ jobs:
         id: test
         uses: ./
 
-      - name: "Debug Outputs"
-        continue-on-error: true
-        env:
-          OUTPUT: ${{ toJSON(steps.test.outputs) }}
-        run: |
-          echo "$OUTPUT"
+      #- name: "Debug Outputs"
+      #  continue-on-error: true
+      #  env:
+      #    OUTPUT: ${{ toJSON(steps.test.outputs) }}
+      #  run: |
+      #    echo "$OUTPUT"
 
       #- name: "Validate Outputs"
       #  uses: cssnr/validate-outputs-action@master
