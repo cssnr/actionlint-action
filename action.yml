@@ -1,5 +1,5 @@
-name: "Actionlint Action"
-description: "Easily use rhysd/actionlint in a Workflow run with Pyflakes and Actions caching."
+name: "Rhysd Actionlint Action"
+description: "Easily use rhysd/actionlint in a Workflow run with Pyflakes and Actions caching. Supports Linux, Windows and macOS."
 author: "Shane"
 
 branding:

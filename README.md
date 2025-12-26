@@ -25,6 +25,12 @@
 
 Easily use [rhysd/actionlint](https://github.com/rhysd/actionlint) in a Workflow run with Pyflakes and Actions caching.
 
+Supports and tested on Linux, Windows and macOS on both Intel and ARM architectures.
+
+[![Linux](https://img.shields.io/badge/linux-orange?style=for-the-badge&logo=linux&logoColor=white)](https://github.com/cssnr/actionlint-action/actions/workflows/test.yaml)
+[![Windows](https://img.shields.io/badge/windows-blue?style=for-the-badge&logo=gitforwindows&logoColor=white)](https://github.com/cssnr/actionlint-action/actions/workflows/test.yaml)
+[![macOS](https://img.shields.io/badge/macos-black?style=for-the-badge&logo=apple&logoColor=white)](https://github.com/cssnr/actionlint-action/actions/workflows/test.yaml)
+
 ```yaml
 - name: 'Actionlint'
   uses: cssnr/actionlint-action@master
