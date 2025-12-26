@@ -80,6 +80,10 @@ runs:
         echo "${{ steps.key.outputs.key }}"
         echo -n "${{ steps.key.outputs.key }}" | od -c
         gh cache list
+        if [ ! -d "${{ runner.temp }}" ];then
+          echo "github is fucking retarded"
+          mkdir -p ${{ runner.temp }}
+        fi
 
     #- name: "Cache Clear"
     #  if: ${{ contains(github.event.head_commit.message, 'delete-actionlint-cache') }}
