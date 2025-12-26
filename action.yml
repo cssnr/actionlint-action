@@ -41,6 +41,7 @@ runs:
           case "$kernel" in
             Darwin)   kernel="darwin"   ;;
             FreeBSD)  kernel="freebsd"  ;;
+            MINGW*)   kernel=windows;;
             Linux)    kernel="linux"    ;;
             * )       kernel="linux"    ;;
           esac
@@ -104,7 +105,7 @@ runs:
         fi
 
         echo "::group::Release - ${tag}"
-        release="$(gh api --cache 1h /repos/rhysd/actionlint/releases/${tag})"
+        release="$(gh api --cache 1h repos/rhysd/actionlint/releases/${tag})"
         echo "release: ${release}"
         echo "::endgroup::"
 
@@ -118,11 +119,22 @@ runs:
         tag_name="$(echo ${release} | jq -r '.tag_name')"
         echo "::group::Download - ${tag_name}"
 
+        name="$(echo ${asset} | jq -r '.name')"
+        echo "Name: ${name}"
         url="$(echo ${asset} | jq -r '.browser_download_url')"
         echo "Downloading: ${url}"
 
         echo "Destination: ${{ runner.temp }}/actionlint"
-        curl -sL "${url}" | tar xz -C "${{ runner.temp }}" actionlint
+        curl -sL "$url" -o "${{ runner.temp }}/${name}"
+
+        #ls -lah "${{ runner.temp }}"
+
+        if [[ ${name} == *.zip ]]; then
+          unzip "${{ runner.temp }}/${name}" -d "${{ runner.temp }}" actionlint.exe
+        else
+          tar xzf "${{ runner.temp }}/${name}" -C "${{ runner.temp }}" actionlint
+        fi
+
         file "${{ runner.temp }}/actionlint" ||:
         echo "::endgroup::"
 
