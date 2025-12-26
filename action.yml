@@ -71,14 +71,24 @@ runs:
       shell: bash
       run: echo "key=${{ env.key }}" >> "$GITHUB_OUTPUT"
 
-    - name: "Cache Clear"
-      if: ${{ contains(github.event.head_commit.message, 'delete-actionlint-cache') }}
+    - name: "Debug"
       continue-on-error: true
       env:
         GH_TOKEN: ${{ inputs.token || github.token }}
       shell: bash
       run: |
-        gh cache delete ${{ steps.key.outputs.key }}
+        echo "${{ steps.key.outputs.key }}"
+        echo "${{ steps.key.outputs.key }}" | od -c
+        gh cache list
+
+    #- name: "Cache Clear"
+    #  if: ${{ contains(github.event.head_commit.message, 'delete-actionlint-cache') }}
+    #  continue-on-error: true
+    #  env:
+    #    GH_TOKEN: ${{ inputs.token || github.token }}
+    #  shell: bash
+    #  run: |
+    #    gh cache delete ${{ steps.key.outputs.key }}
 
     - name: "Cache Restore"
       id: cache
