@@ -163,7 +163,7 @@ runs:
       with:
         key: ${{ steps.cache.outputs.cache-primary-key }}
         path: |
-          ${{ runner.temp }}/actionlint
+          ${{ runner.temp }}/actionlint*
           ${{ runner.temp }}/pyflakes-*-py2.py3-none-any.whl
 
     - name: "Actionlint"
