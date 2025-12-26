@@ -71,28 +71,14 @@ runs:
       shell: bash
       run: echo "key=${{ env.key }}" >> "$GITHUB_OUTPUT"
 
-    - name: "Debug"
+    - name: "Cache Clear"
+      if: ${{ contains(github.event.head_commit.message, 'delete-actionlint-cache') }}
       continue-on-error: true
       env:
         GH_TOKEN: ${{ inputs.token || github.token }}
       shell: bash
       run: |
-        echo "${{ steps.key.outputs.key }}"
-        echo -n "${{ steps.key.outputs.key }}" | od -c
-        gh cache list
-        if [ ! -d "${{ runner.temp }}" ];then
-          echo "github is fucking retarded"
-          mkdir -p ${{ runner.temp }}
-        fi
-
-    #- name: "Cache Clear"
-    #  if: ${{ contains(github.event.head_commit.message, 'delete-actionlint-cache') }}
-    #  continue-on-error: true
-    #  env:
-    #    GH_TOKEN: ${{ inputs.token || github.token }}
-    #  shell: bash
-    #  run: |
-    #    gh cache delete ${{ steps.key.outputs.key }}
+        gh cache delete ${{ steps.key.outputs.key }}
 
     - name: "Cache Restore"
       id: cache
