@@ -78,7 +78,7 @@ runs:
       shell: bash
       run: |
         echo "${{ steps.key.outputs.key }}"
-        echo "${{ steps.key.outputs.key }}" | od -c
+        echo -n "${{ steps.key.outputs.key }}" | od -c
         gh cache list
 
     #- name: "Cache Clear"
