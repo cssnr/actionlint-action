@@ -64,30 +64,39 @@ runs:
         fi
         echo "::endgroup::"
 
-    - name: "Cache Key"
-      id: key
-      env:
-        key: actionlint-${{ inputs.version }}-${{ steps.arch.outputs.arch }}
-      shell: bash
-      run: echo "key=${{ env.key }}" >> "$GITHUB_OUTPUT"
-
-    - name: "Cache Clear"
-      if: ${{ contains(github.event.head_commit.message, 'delete-actionlint-cache') }}
-      continue-on-error: true
-      env:
-        GH_TOKEN: ${{ inputs.token || github.token }}
-      shell: bash
-      run: |
-        gh cache delete ${{ steps.key.outputs.key }}
-
-    - name: "Cache Restore"
+    - name: "Cache"
       id: cache
-      uses: actions/cache/restore@v4
+      uses: actions/cache@v5
       with:
-        key: ${{ steps.key.outputs.key }}
+        key: actionlint-${{ inputs.version }}-${{ steps.arch.outputs.arch }}
         path: |
           ${{ runner.temp }}/actionlint
           ${{ runner.temp }}/pyflakes-*-py2.py3-none-any.whl
+
+    #- name: "Cache Key"
+    #  id: key
+    #  env:
+    #    key: actionlint-${{ inputs.version }}-${{ steps.arch.outputs.arch }}
+    #  shell: bash
+    #  run: echo "key=${{ env.key }}" >> "$GITHUB_OUTPUT"
+
+    #- name: "Cache Clear"
+    #  if: ${{ contains(github.event.head_commit.message, 'delete-actionlint-cache') }}
+    #  continue-on-error: true
+    #  env:
+    #    GH_TOKEN: ${{ inputs.token || github.token }}
+    #  shell: bash
+    #  run: |
+    #    gh cache delete ${{ steps.key.outputs.key }}
+
+    #- name: "Cache Restore"
+    #  id: cache
+    #  uses: actions/cache/restore@v4
+    #  with:
+    #    key: ${{ steps.key.outputs.key }}
+    #    path: |
+    #      ${{ runner.temp }}/actionlint
+    #      ${{ runner.temp }}/pyflakes-*-py2.py3-none-any.whl
 
     - name: "Download"
       id: download
@@ -155,14 +164,14 @@ runs:
         fi
         echo "::endgroup::"
 
-    - name: "Cache Save"
-      if: ${{ steps.cache.outputs.cache-hit != 'true' }}
-      uses: actions/cache/save@v4
-      with:
-        key: ${{ steps.cache.outputs.cache-primary-key }}
-        path: |
-          ${{ runner.temp }}/actionlint*
-          ${{ runner.temp }}/pyflakes-*-py2.py3-none-any.whl
+    #- name: "Cache Save"
+    #  if: ${{ steps.cache.outputs.cache-hit != 'true' }}
+    #  uses: actions/cache/save@v4
+    #  with:
+    #    key: ${{ steps.cache.outputs.cache-primary-key }}
+    #    path: |
+    #      ${{ runner.temp }}/actionlint*
+    #      ${{ runner.temp }}/pyflakes-*-py2.py3-none-any.whl
 
     - name: "Actionlint"
       id: actionlint
