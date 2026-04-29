@@ -2,16 +2,17 @@
 [![GitHub Tag Minor](https://img.shields.io/github/v/tag/cssnr/actionlint-action?sort=semver&filter=!v*.*.*&logo=git&logoColor=white&labelColor=585858&label=%20)](https://github.com/cssnr/actionlint-action/releases)
 [![GitHub Release Version](https://img.shields.io/github/v/release/cssnr/actionlint-action?logo=git&logoColor=white&labelColor=585858&label=%20)](https://github.com/cssnr/actionlint-action/releases/latest)
 [![Action Run Using](https://img.shields.io/badge/dynamic/yaml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fcssnr%2Factionlint-action%2Frefs%2Fheads%2Fmaster%2Faction.yml&query=%24.runs.using&logo=githubactions&logoColor=white&label=runs)](https://github.com/cssnr/actionlint-action/blob/master/action.yml)
-[![Workflow Release](https://img.shields.io/github/actions/workflow/status/cssnr/actionlint-action/release.yaml?logo=cachet&label=release)](https://github.com/cssnr/actionlint-action/actions/workflows/release.yaml)
-[![Workflow Lint](https://img.shields.io/github/actions/workflow/status/cssnr/actionlint-action/lint.yaml?logo=cachet&label=lint)](https://github.com/cssnr/actionlint-action/actions/workflows/lint.yaml)
-[![GitHub Last Commit](https://img.shields.io/github/last-commit/cssnr/actionlint-action?logo=github&label=updated)](https://github.com/cssnr/actionlint-action/pulse)
+[![Workflow Release](https://img.shields.io/github/actions/workflow/status/cssnr/actionlint-action/release.yaml?logo=norton&logoColor=white&label=release)](https://github.com/cssnr/actionlint-action/actions/workflows/release.yaml)
+[![Workflow Lint](https://img.shields.io/github/actions/workflow/status/cssnr/actionlint-action/lint.yaml?logo=norton&logoColor=white&label=lint)](https://github.com/cssnr/actionlint-action/actions/workflows/lint.yaml)
+[![GitHub Last Commit](https://img.shields.io/github/last-commit/cssnr/actionlint-action?logo=github&label=updated)](https://github.com/cssnr/actionlint-action)
 [![Codeberg Last Commit](https://img.shields.io/gitea/last-commit/cssnr/actionlint-action/master?gitea_url=https%3A%2F%2Fcodeberg.org%2F&logo=codeberg&logoColor=white&label=updated)](https://codeberg.org/cssnr/actionlint-action)
-[![GitHub Repo Size](https://img.shields.io/github/repo-size/cssnr/actionlint-action?logo=bookstack&logoColor=white&label=repo%20size)](https://github.com/cssnr/actionlint-action?tab=readme-ov-file#readme)
-[![GitHub Contributors](https://img.shields.io/github/contributors-anon/cssnr/actionlint-action?logo=github)](https://github.com/cssnr/actionlint-action/graphs/contributors)
-[![GitHub Discussions](https://img.shields.io/github/discussions/cssnr/actionlint-action?logo=github)](https://github.com/cssnr/actionlint-action/discussions)
-[![GitHub Forks](https://img.shields.io/github/forks/cssnr/actionlint-action?style=flat&logo=github)](https://github.com/cssnr/actionlint-action/forks)
-[![GitHub Repo Stars](https://img.shields.io/github/stars/cssnr/actionlint-action?style=flat&logo=github)](https://github.com/cssnr/actionlint-action/stargazers)
-[![GitHub Org Stars](https://img.shields.io/github/stars/cssnr?style=flat&logo=github&label=org%20stars)](https://cssnr.github.io/)
+[![GitHub Repo Size](https://img.shields.io/github/repo-size/cssnr/actionlint-action?logo=buffer&label=repo%20size)](https://github.com/cssnr/actionlint-action?tab=readme-ov-file#readme)
+[![GitHub Contributors](https://img.shields.io/github/contributors-anon/cssnr/actionlint-action?logo=southwestairlines)](https://github.com/cssnr/actionlint-action/graphs/contributors)
+[![GitHub Issues](https://img.shields.io/github/issues/cssnr/actionlint-action?logo=codeforces&logoColor=white)](https://github.com/cssnr/actionlint-action/issues)
+[![GitHub Discussions](https://img.shields.io/github/discussions/cssnr/actionlint-action?logo=livechat&logoColor=white)](https://github.com/cssnr/actionlint-action/discussions)
+[![GitHub Forks](https://img.shields.io/github/forks/cssnr/actionlint-action?style=flat&logo=forgejo&logoColor=white)](https://github.com/cssnr/actionlint-action/forks)
+[![GitHub Repo Stars](https://img.shields.io/github/stars/cssnr/actionlint-action?style=flat&logo=gleam&logoColor=white)](https://github.com/cssnr/actionlint-action/stargazers)
+[![GitHub Org Stars](https://img.shields.io/github/stars/cssnr?style=flat&logo=apachespark&logoColor=white&label=org%20stars)](https://cssnr.github.io/)
 [![Discord](https://img.shields.io/discord/899171661457293343?logo=discord&logoColor=white&label=discord&color=7289da)](https://discord.gg/wXy6m2X8wY)
 [![Ko-fi](https://img.shields.io/badge/Ko--fi-72a5f2?logo=kofi&label=support)](https://ko-fi.com/cssnr)
 
@@ -116,18 +117,17 @@ Breaking changes would result in a **Major** version bump. At a minimum you shou
 
 # Support
 
-For general help or to request a feature, see:
+If you run into any issues or need help getting started, please do one of the following:
 
-- Q&A Discussion: https://github.com/cssnr/actionlint-action/discussions/categories/q-a
-- Request a Feature: https://github.com/cssnr/actionlint-action/discussions/categories/feature-requests
+- [Report an Issue](https://github.com/cssnr/actionlint-action/issues)
+- [Q&A Discussion](https://github.com/cssnr/actionlint-action/discussions/categories/q-a)
+- [Request a Feature](https://github.com/cssnr/actionlint-action/issues/new?template=1-feature.yaml)
+- [Chat with us on Discord](https://discord.gg/wXy6m2X8wY)
 
-If you are experiencing an issue/bug or getting unexpected results, you can:
-
-- Report an Issue: https://github.com/cssnr/actionlint-action/issues
-- Chat with us on Discord: https://discord.gg/wXy6m2X8wY
-- Provide General Feedback: [https://cssnr.github.io/feedback/](https://cssnr.github.io/feedback/?app=Update%20Release%20Notes)
-
-For more information, see the CSSNR [SUPPORT.md](https://github.com/cssnr/.github/blob/master/.github/SUPPORT.md#support).
+[![Features](https://img.shields.io/badge/features-brightgreen?style=for-the-badge&logo=rocket&logoColor=white)](https://github.com/cssnr/actionlint-action/issues/new?template=1-feature.yaml)
+[![Issues](https://img.shields.io/badge/issues-red?style=for-the-badge&logo=southwestairlines&logoColor=white)](https://github.com/cssnr/actionlint-action/issues)
+[![Discussions](https://img.shields.io/badge/discussions-blue?style=for-the-badge&logo=livechat&logoColor=white)](https://github.com/cssnr/actionlint-action/discussions)
+[![Discord](https://img.shields.io/badge/discord-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/wXy6m2X8wY)
 
 # Contributing
 
@@ -146,8 +146,10 @@ Additionally, you can support other [GitHub Actions](https://actions.cssnr.com/)
 - [Portainer Stack Deploy Action](https://github.com/cssnr/portainer-stack-deploy-action?tab=readme-ov-file#readme)
 - [Docker Context Action](https://github.com/cssnr/docker-context-action?tab=readme-ov-file#readme)
 - [Actions Up Action](https://github.com/cssnr/actions-up-action?tab=readme-ov-file#readme)
+- [Rhysd Actionlint Action](https://github.com/cssnr/actionlint-action?tab=readme-ov-file#readme)
 - [Zensical Action](https://github.com/cssnr/zensical-action?tab=readme-ov-file#readme)
 - [VirusTotal Action](https://github.com/cssnr/virustotal-action?tab=readme-ov-file#readme)
+- [Homebrew Action](https://github.com/cssnr/homebrew-action?tab=readme-ov-file#readme)
 - [Mirror Repository Action](https://github.com/cssnr/mirror-repository-action?tab=readme-ov-file#readme)
 - [Update Version Tags Action](https://github.com/cssnr/update-version-tags-action?tab=readme-ov-file#readme)
 - [Docker Tags Action](https://github.com/cssnr/docker-tags-action?tab=readme-ov-file#readme)
@@ -161,6 +163,7 @@ Additionally, you can support other [GitHub Actions](https://actions.cssnr.com/)
 - [NPM Outdated Check Action](https://github.com/cssnr/npm-outdated-action?tab=readme-ov-file#readme)
 - [Label Creator Action](https://github.com/cssnr/label-creator-action?tab=readme-ov-file#readme)
 - [Algolia Crawler Action](https://github.com/cssnr/algolia-crawler-action?tab=readme-ov-file#readme)
+- [Create Pull Action](https://github.com/cssnr/create-pull-action?tab=readme-ov-file#readme)
 - [Upload Release Action](https://github.com/cssnr/upload-release-action?tab=readme-ov-file#readme)
 - [Check Build Action](https://github.com/cssnr/check-build-action?tab=readme-ov-file#readme)
 - [Web Request Action](https://github.com/cssnr/web-request-action?tab=readme-ov-file#readme)
@@ -198,3 +201,11 @@ Note: The `docker-test-action` builds, runs and pushes images to [GitHub Contain
 </details>
 
 For a full list of current projects visit: [https://cssnr.github.io/](https://cssnr.github.io/)
+
+<a href="https://github.com/cssnr/actionlint-action">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=cssnr/actionlint-action&type=date&legend=bottom-right&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=cssnr/actionlint-action&type=date&legend=bottom-right" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=cssnr/actionlint-action&type=date&legend=bottom-right" />
+ </picture>
+</a>
